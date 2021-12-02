@@ -1,6 +1,44 @@
-// Import stylesheets
-import './style.css';
+const express = require('express');
 
-// Write Javascript code!
-const appDiv = document.getElementById('app');
-appDiv.innerHTML = `<h1>JS Starter</h1>`;
+const server = express();
+
+server.use(express.json());
+
+const cursos = [
+  'FullStack Developer',
+  'Front-end Developer',
+  'Back-end Developer',
+];
+
+server.get('/cursos/:index', (req, res) => {
+  const { index } = req.params;
+
+  return res.json(cursos[index]);
+});
+
+server.get('/cursos', (req, res) => {
+  return res.json(cursos);
+});
+
+server.post('/cursos', (req, res) => {
+  const { name } = req.body;
+  cursos.push(name);
+});
+
+server.put('/cursos/:index', (req, res) => {
+  const { index } = req.params;
+  const { name } = req.body;
+
+  cursos[index] = name;
+
+  return res.json(cursos);
+});
+
+server.delete('/cursos/:index', (req, res) => {
+  const { index } = req.params;
+
+  cursos.splice(index, 1);
+  return res.json({ message: `O curso ${index} foi excluído` });
+});
+
+server.listen(3000);

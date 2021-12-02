@@ -2,5 +2,8 @@
   "name": "js",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1",
+    "node": "^17.1.0"
+  }
 }
